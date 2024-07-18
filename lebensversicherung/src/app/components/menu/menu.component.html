@@ -1,0 +1,40 @@
+<div class="container" >
+    <div class="card">
+      <div class="card-header">Tesla Menu</div>
+  
+      <div class="card-body" appManageStepper>
+        <div class="row" >
+          <!-- div class="col-4">
+              <button class="btn btn-outline-secondary " id="step1" [routerLink]="['/home/step1']">Stepper 1</button>
+  
+          </div>
+          <div class="col-4">
+              <button class="btn btn-outline-secondary " id="step2" [routerLink]="['/home/step2']" >Stepper 2</button>
+          </div>
+          <div class="col-4">
+              <button class="btn btn-outline-secondary " id="step3" [routerLink]="['/home/step3']">Stepper 3</button>
+          </div -->
+          <div class="stepper-wrapper">
+            <div class="stepper-item completed">
+              <div class="step-counter">1</div>
+              <div class="step-name">First</div>
+            </div>
+            <div class="stepper-item completed">
+              <div class="step-counter">2</div>
+              <div class="step-name">Second</div>
+            </div>
+            <div class="stepper-item active">
+              <div class="step-counter">3</div>
+              <div class="step-name">Third</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">4</div>
+              <div class="step-name">Forth</div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
