@@ -1,1 +1,120 @@
-<p>persoenliche-angaben works!</p>
+<div class="container">
+  <div class="row" style="border: 1px solid #dcdcdc">
+    <div class="col-12">
+      <br />
+    </div>
+
+    <div class="col-12">
+      <form [formGroup]="formallgemainKundInfo" (submit)="speicher()">
+        <div class="row">
+        <div class="col-6">
+          <label for="geburtsDatum" class="form-label"
+            >Wann sind Sie geboren?
+          </label>
+          <input
+            formControlName="geburtsDatum"
+            type="date"
+            class="form-control form-control-sm"
+            aria-describedby="emailHelp"
+            
+            [ngClass]="{ 'is-invalid': submitted && validateForm['geburtsDatum'].errors }"
+          />
+          @if (submitted && validateForm['geburtsDatum'].errors) {
+          <div class="hasErrorForm">
+            @if (validateForm['geburtsDatum'].errors['required']) {
+            <div>
+                <hr>
+                Bitte ein korrektes Datum eingeben.
+            </div>
+            }
+          </div>
+          }
+        </div>
+        <div class="col-6">
+          
+          <label for="beruf" class="form-label"
+            >Welchen Beruf üben Sie derzeit aus?
+          </label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="beruf"
+            [ngClass]="{ 'is-invalid': submitted && validateForm['beruf'].errors }"
+          />
+          @if (submitted && validateForm['beruf'].errors) {
+            <div class="hasErrorForm">
+            @if (validateForm['beruf'].errors['required']) {
+                <div>
+                    <hr>
+                    Bitte geben Sie Ihren Beruf ein.</div>
+            }
+        </div>
+          }
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+
+        <div class="col-6">
+             
+          <label for="anzahlKinder" class="form-label"
+            >Haben Sie eigene Kinder, die in Ihrem Haushalt leben?
+          </label>
+      
+          <select formControlName="anzahlKinder" 
+           class="form-control form-control-sm" 
+           [ngClass]="{ 'is-invalid': submitted && validateForm['anzahlKinder'].errors }">
+            <option *ngFor="let anzalKinder of anzalKinders | keyvalue : originalOrder " [ngValue]="anzalKinder.key">
+              {{anzalKinder.value}}
+            </option>
+        </select>
+          @if (submitted && validateForm['anzahlKinder'].errors) {
+            <div class="hasErrorForm">
+            @if (validateForm['anzahlKinder'].errors['required']) {
+                <div>
+                    <hr>
+                    Bitte geben Sie an, wie viele Kinder Sie haben.</div>
+            }
+        </div>
+          }
+        </div> 
+        <div class="col-6">
+            
+          <label for="exampleInputPassword1" class="form-label">
+            Wann haben Sie zuletzt geraucht?
+          </label>
+            
+          <select formControlName="raucher" 
+           class="form-control form-control-sm" 
+           [ngClass]="{ 'is-invalid': submitted && validateForm['raucher'].errors }">
+            <option *ngFor="let raucher of raucherstatusses | keyvalue : originalOrder " [ngValue]="raucher.key">
+              {{raucher.value}}
+            </option>
+            </select>
+         
+         
+         
+          @if (submitted && validateForm['raucher'].errors) {
+            <div class="hasErrorForm">
+            @if (validateForm['raucher'].errors['required']) {
+                <div>
+                    <hr>
+                    Bitte geben Sie an, ob Sie Raucher sind.</div>
+            }
+        </div>
+          }
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-12">
+             
+            <button type="submit" [disabled]="formallgemainKundInfo.invalid">Wieter</button>
+        </div>
+    </div>
+      </form>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+ 
 import { SharedModule } from '../../shared/shared.module';
+import { VersicherungsBeitragComponent } from '../versicherungs-beitrag/versicherungs-beitrag.component';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule,VersicherungsBeitragComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })

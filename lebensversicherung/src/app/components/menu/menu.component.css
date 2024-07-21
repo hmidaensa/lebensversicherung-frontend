@@ -1,9 +1,9 @@
 .stepper-wrapper {
     font-family: Arial;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px;*/
   }
   .stepper-item {
     position: relative;

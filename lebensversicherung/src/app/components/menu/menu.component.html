@@ -1,6 +1,10 @@
+
+<!-- p>https://www.bezkoder.com/angular-17-form-validation/</p -->
+
+
 <div class="container" >
     <div class="card">
-      <div class="card-header">Tesla Menu</div>
+      <div class="card-header">Risikolebensversicherung - jetzt berechnen und Angebot anfragen</div>
   
       <div class="card-body" appManageStepper>
         <div class="row" >
@@ -14,27 +18,47 @@
           <div class="col-4">
               <button class="btn btn-outline-secondary " id="step3" [routerLink]="['/home/step3']">Stepper 3</button>
           </div -->
+          <div class="col-12">
+            
+         
           <div class="stepper-wrapper">
-            <div class="stepper-item completed">
+            <div class="stepper-item completed" appStepper>
               <div class="step-counter">1</div>
-              <div class="step-name">First</div>
+              <div class="step-name">Per­seon­li­che An­ga­ben</div>
             </div>
-            <div class="stepper-item completed">
+            <div class="stepper-item completed" appStepper>
               <div class="step-counter">2</div>
               <div class="step-name">Second</div>
             </div>
-            <div class="stepper-item active">
+            <div class="stepper-item active" appStepper>
               <div class="step-counter">3</div>
               <div class="step-name">Third</div>
             </div>
-            <div class="stepper-item">
+            <div class="stepper-item" appStepper>
               <div class="step-counter">4</div>
               <div class="step-name">Forth</div>
             </div>
           </div>
+
+        
   
         </div>
+ 
       </div>
     </div>
+    <div class="row" >
+      <div class="col-10">
+        <hr>
+        <router-outlet></router-outlet>
+      </div>
+      <div class="col-2">
+        <hr>
+        <app-versicherungs-beitrag></app-versicherungs-beitrag>
+        <hr>
+        <app-versicherungs-beitrag></app-versicherungs-beitrag>
+      </div>
+
+    </div>
+     
   </div>
-  <router-outlet></router-outlet>
+
