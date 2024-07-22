@@ -9,9 +9,4 @@ export enum AnzalKinder {
   
     
 }
-export namespace AnzalKinder {
-
  
-
- 
-  }

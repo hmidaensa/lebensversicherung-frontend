@@ -4,7 +4,14 @@
     <div class="row" >
       <div class="col-12">Zahlender Beitrag</div>
       <hr>
-      <div class="col-12">{{antragService.beitrag()}} $</div>
+      <div class="col-12">
+        @if (antragService.beitrag()) {
+          {{antragService.beitrag()}} 
+        }
+        @else {
+          0
+        }
+        €</div>
       <div class="col-12">{{antragService.antrag()?.allgemainKundInfo?.anzahlKinder}}</div>
     </div>
   </div>

@@ -9,7 +9,7 @@ input{
     color: red;
 
 }
-input,select{
+input[type="text"],select{
     border-inline-start-width: thick;
     border-left-color: green;
 }
