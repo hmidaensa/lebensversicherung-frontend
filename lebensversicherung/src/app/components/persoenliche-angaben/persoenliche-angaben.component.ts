@@ -93,7 +93,7 @@ export class PersoenlicheAngabenComponent {
   }
 
   hasSeaugling():void{
-    let dd=this.formallgemainKundInfo.value['seaugling']
+    //let dd=this.formallgemainKundInfo.value['seaugling']
     if (this.formallgemainKundInfo.value['seaugling']=='true') {
        this.hasKinderUnten6=true
       this.formallgemainKundInfo.controls['geburtsDatum6'].setValidators([
@@ -114,6 +114,7 @@ export class PersoenlicheAngabenComponent {
       this.formallgemainKundInfo.updateValueAndValidity()
     }
     this.rechnerBeitrag()
+     
   }
 
   

@@ -8,6 +8,8 @@ import { UtilsService } from './utils.service';
 })
 export class AntragService extends UtilsService {
   antrag = signal<AntragLebensVersicherung | null>(null);
+  isActivateStepper2 = signal(false);
+  isActivateStepper3 = signal(false);
 
   beitrag = computed(() => {
     return this.beitragKinder()+this.beitragRaucher()+this.beitragAlter()

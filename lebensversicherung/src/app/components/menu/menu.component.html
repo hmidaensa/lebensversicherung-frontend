@@ -1,14 +1,14 @@
-
 <!-- p>https://www.bezkoder.com/angular-17-form-validation/</p -->
 
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      Risikolebensversicherung - jetzt berechnen und Angebot anfragen
+    </div>
 
-<div class="container" >
-    <div class="card">
-      <div class="card-header">Risikolebensversicherung - jetzt berechnen und Angebot anfragen</div>
-  
-      <div class="card-body" appManageStepper>
-        <div class="row" >
-          <!-- div class="col-4">
+    <div class="card-body" appStepper>
+      <div class="row">
+        <!-- div class="col-4">
               <button class="btn btn-outline-secondary " id="step1" [routerLink]="['/home/step1']">Stepper 1</button>
   
           </div>
@@ -18,47 +18,55 @@
           <div class="col-4">
               <button class="btn btn-outline-secondary " id="step3" [routerLink]="['/home/step3']">Stepper 3</button>
           </div -->
-          <div class="col-12">
-            
-         
+        <div class="col-12">
           <div class="stepper-wrapper">
-            <div class="stepper-item completed" appStepper>
-              <div class="step-counter">1</div>
+            <div
+              class="stepper-item completed"
+              id="step1"
+              [routerLink]="['/start/menu/perseonliche-angaben']"
+            >
+              <div class="step-counter">
+                <a [routerLink]="['/start']"> 1 </a>
+              </div>
               <div class="step-name">Per­seon­li­che An­ga­ben</div>
             </div>
-            <div class="stepper-item completed" appStepper>
-              <div class="step-counter">2</div>
-              <div class="step-name">Second</div>
+            <div
+              class="stepper-item completed"
+              id="step2"
+              [routerLink]="['/home/step2']"
+            >
+              <div class="step-counter">
+                <a [routerLink]="['/start/menu/']"> 2 </a>
+              </div>
+              <div class="step-name">Tarif</div>
             </div>
-            <div class="stepper-item active" appStepper>
-              <div class="step-counter">3</div>
+            <div class="stepper-item" id="step3" [routerLink]="['/home/step3']">
+              <div class="step-counter">
+                <a [routerLink]="['/start/menu/']"> 3 </a>
+              </div>
               <div class="step-name">Third</div>
             </div>
-            <div class="stepper-item" appStepper>
-              <div class="step-counter">4</div>
+            <div class="stepper-item">
+              <div class="step-counter">
+                <a [routerLink]="['/start/menu/']"> 4 </a>
+              </div>
               <div class="step-name">Forth</div>
             </div>
           </div>
-
-        
-  
         </div>
- 
       </div>
     </div>
-    <div class="row" >
+    <div class="row">
       <div class="col-10">
-        <hr>
+        <hr />
         <router-outlet></router-outlet>
       </div>
       <div class="col-2">
-        <hr>
+        <hr />
         <app-versicherungs-beitrag></app-versicherungs-beitrag>
-        <hr>
+        <hr />
         <app-versicherungs-beitrag></app-versicherungs-beitrag>
       </div>
-
     </div>
-     
   </div>
-
+</div>
