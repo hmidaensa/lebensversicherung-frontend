@@ -19,6 +19,7 @@
               [ngClass]="{
                 'is-invalid': submitted && validateForm['geburtsDatum'].errors
               }"
+              
             />
             @if (submitted && validateForm['geburtsDatum'].errors) {
             <div class="hasErrorForm">
@@ -125,7 +126,8 @@
             </div>
             }
           </div>
-          @if (hasKinder) {
+          
+          @if (formallgemainKundInfo.value['anzahlKinder'] && formallgemainKundInfo.value['anzahlKinder']!="KEINE_K") {
             <div class="col-12">
               <hr />
             </div>
@@ -135,8 +137,7 @@
               </label>
             </div>
             <div class="col-12 text-center">
-             
-  
+
               <div class="form-check form-check-inline">
                 <input
                   class="form-check-input"
@@ -185,7 +186,8 @@
               }
             </div>
           }
-          @if (hasKinderUnten6) {
+          @if ((formallgemainKundInfo.value['seaugling'] && formallgemainKundInfo.value['seaugling']=="true")) {
+            
 
           <div class="col-12">
             <hr />

@@ -22,6 +22,7 @@ export class StepperDirective {
 
     let isActivateStepper2 = this.antragService.isActivateStepper2();
     let isActivateStepper3 = this.antragService.isActivateStepper3();
+    console.log(isActivateStepper2)
 
     if (isActivateStepper2) {
       this.renderer.setStyle(step2, 'pointer-events', '');

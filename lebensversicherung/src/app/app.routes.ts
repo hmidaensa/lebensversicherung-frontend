@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RisikoLebensversicherungStartComponent } from './components/risiko-lebensversicherung-start/risiko-lebensversicherung-start.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { PersoenlicheAngabenComponent } from './components/persoenliche-angaben/persoenliche-angaben.component';
+import { TarifComponent } from './components/tarif/tarif.component';
 
 export const routes: Routes = [
     {
@@ -29,6 +30,12 @@ export const routes: Routes = [
                       path: 'perseonliche-angaben',
                       component: PersoenlicheAngabenComponent,
                     },
+                    {
+                      path: 'tarif',
+                      component: TarifComponent,
+                    },
+
+                    
                   
                 ],
               },

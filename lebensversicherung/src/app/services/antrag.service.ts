@@ -12,19 +12,26 @@ export class AntragService extends UtilsService {
   isActivateStepper3 = signal(false);
 
   beitrag = computed(() => {
-    return this.beitragKinder()+this.beitragRaucher()+this.beitragAlter()
-   });
+    return this.beitragKinder() + this.beitragRaucher() + this.beitragAlter();
+  });
   beitragKinder = computed(() => {
-     return this.rechnerBeitragKinder(this.antrag()?.allgemainKundInfo?.anzahlKinder!,this.antrag()?.allgemainKundInfo?.seaugling!);
+    return this.rechnerBeitragKinder(
+      this.antrag()?.allgemainKundInfo?.anzahlKinder!,
+      this.antrag()?.allgemainKundInfo?.seaugling!
+    );
   });
 
   beitragAlter = computed(() => {
-    return this.rechnerBeitragAlter(this.antrag()?.allgemainKundInfo?.geburtsDatum!)
-   });
+    return this.rechnerBeitragAlter(
+      this.antrag()?.allgemainKundInfo?.geburtsDatum!
+    );
+  });
 
-   beitragRaucher = computed(() => {
-    return this.rechnerBeitragRaucher(this.antrag()?.allgemainKundInfo?.raucher!)
-   });
+  beitragRaucher = computed(() => {
+    return this.rechnerBeitragRaucher(
+      this.antrag()?.allgemainKundInfo?.raucher!
+    );
+  });
 
   setPersoenlicheDaten(allgemainKundInfo: AllgemainKundInfo): void {
     this.antrag.update((item) => {
@@ -33,5 +40,9 @@ export class AntragService extends UtilsService {
         allgemainKundInfo: allgemainKundInfo,
       };
     });
+  }
+
+  geheZuSchritt2(schritt: boolean): void {
+    this.isActivateStepper2.set(schritt);
   }
 }

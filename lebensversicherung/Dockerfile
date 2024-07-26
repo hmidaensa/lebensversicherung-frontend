@@ -1,26 +1,28 @@
-FROM node:latest AS build 
+# Use official node image as the base image
+FROM node:20-alpine3.20 AS build
 
-WORKDIR /app
+# Set the working directory
+WORKDIR /usr/local/app
 
+# Add the source code to app
+COPY ./ /usr/local/app/
 
-CMD [ "npm", "run", "start" ]
+# Install all the dependencies
+RUN npm install
 
-COPY package*.json ./ 
-
-RUN npm ci
-
-RUN npm install g @angular/cli
-
-COPY . .
-
-RUN npm run build --configuration=production
-
-FROM nginx:latest
+# Generate the build of the application
+RUN npm run build
 
 
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-# copy the built Angular app files to the default nginx html directory
-COPY --from=build /app/dist/lebensversicherung/broser /usr/share/nginx/html
+# Stage 2: Serve app with nginx server
 
+# Use official nginx image as the base image
+FROM nginx:1-alpine3.18
+
+# Copy the build output to replace the default nginx contents.
+COPY --from=build /usr/local/app/dist/lebensversicherung/browser /usr/share/nginx/html
+COPY --from=build /usr/local/app/dist/lebensversicherung/browser/index.csr.html /usr/share/nginx/html/index.html
+
+# Expose port 80
 EXPOSE 80
 

@@ -39,4 +39,41 @@ kubectl get pods
 docker ps 
 docker images
 
+
+
+
+#### deployment with docker
+docker build -t yourusarenmdocker/myapp:latest  .  
+docker run -d -p 8080:80 myapp:latest
+
+
+
+
+### or docker compose
 docker-compose up --build -d
+docker image push atanane/myapp-lebensversicherung:latest
+
+### kuberntes 
+# Start minikube
+minikube start
+
+# Set docker env
+minikube docker-env | Invoke-Expression # PowerShell
+## install helm 
+helm install lebensverischerung-chart-2 lebensversicherung
+
+
+
+# Check that it's running
+kubectl get pods
+
+
+###
+
+kubectl delete --all pods --namespace=foo
+kubectl delete --all deployments --namespace=foo
+
+kubectl delete --all namespaces
+
+helm list -a
+
