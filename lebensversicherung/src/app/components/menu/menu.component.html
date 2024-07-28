@@ -22,27 +22,30 @@
           <div class="stepper-wrapper">
             <div class="stepper-item completed" id="step1">
               <div class="step-counter">
-                <a [routerLink]="['/start/menu/perseonliche-angaben']"> 1 </a>
+                <a [routerLink]="['/start/menu/perseonliche-angaben']"> 
+                  <i class="bi bi-patch-question"></i>
+                 </a>
               </div>
-              <div class="step-name">Persönliche Angaben</div>
+              
+              <div class="step-name">Fragen zu Ihrer Person</div>
             </div>
             <div class="stepper-item completed" id="step2">
               <div class="step-counter">
-                <a [routerLink]="['/start/menu/tarif']"> 2 </a>
+                <a [routerLink]="['/start/menu/tarif']"> <i class="bi bi-wallet2"></i> </a>
               </div>
               <div class="step-name">Absicherungsgewünscht</div>
             </div>
             <div class="stepper-item" id="step3">
               <div class="step-counter">
-                <a [routerLink]="['/home/menu/tarif']"> 3 </a>
+                <a [routerLink]="['/home/menu/tarif']">  <i class="bi bi-person-check-fill"></i> </a>
               </div>
-              <div class="step-name">Third</div>
+              <div class="step-name">Persönliche Angaben</div>
             </div>
             <div class="stepper-item">
               <div class="step-counter">
-                <a [routerLink]="['/start/menu/']"> 4 </a>
+                <a [routerLink]="['/start/menu/']"> <i class="bi bi-receipt"></i> </a>
               </div>
-              <div class="step-name">Forth</div>
+              <div class="step-name">Zusammenfassung</div>
             </div>
           </div>
         </div>

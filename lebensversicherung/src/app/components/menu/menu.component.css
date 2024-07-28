@@ -55,7 +55,7 @@
   }
   
   .stepper-item.completed .step-counter {
-    background-color: #4bb543;
+    /*background-color: #4bb543;*/
   }
   
   .stepper-item.completed::after {

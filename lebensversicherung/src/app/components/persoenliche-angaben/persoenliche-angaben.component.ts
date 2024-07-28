@@ -1,11 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AllgemainKundInfo } from '../../interfaces/allgemain-kund-info';
 import { AntragService } from '../../services/antrag.service';
 import { SharedModule } from '../../shared/shared.module';
 import {
   FormBuilder,
-  FormGroup,
-  FormControl,
   Validators,
 } from '@angular/forms';
 import { AnzalKinder } from '../../enums/anzal-kinder';
@@ -29,18 +26,12 @@ export class PersoenlicheAngabenComponent implements OnInit {
 
   public readonly originalOrder = (): number => 0;
 
-  
-
   constructor(
     public antragService: AntragService,
     public formBuilder: FormBuilder,
     private router: Router
-  ) {
-    
-  }
-  ngOnInit(): void {
-   
-  }
+  ) {}
+  ngOnInit(): void {}
 
   get validateForm() {
     return this.antragService.formAntrag().formallgemainKundInfo.controls;
@@ -49,21 +40,31 @@ export class PersoenlicheAngabenComponent implements OnInit {
   speicher(): void {
     this.submitted = true;
     if (this.antragService.formAntrag().formallgemainKundInfo.valid) {
-      this.antragService.setPersoenlicheDaten(this.antragService.formAntrag().formallgemainKundInfo.value);
+      this.antragService.setPersoenlicheDaten(
+        this.antragService.formAntrag().formallgemainKundInfo.value
+      );
       this.router.navigate(['/start/menu/tarif']);
     }
   }
 
   rechnerBeitrag(): void {
-    this.antragService.setPersoenlicheDaten(this.antragService.formAntrag().formallgemainKundInfo.value);
+    this.antragService.setPersoenlicheDaten(
+      this.antragService.formAntrag().formallgemainKundInfo.value
+    );
 
     if (
       this.antragService.getEnumKeyByEnumValue(
         AnzalKinder,
         AnzalKinder.KEINE_K
-      ) == this.antragService.formAntrag().formallgemainKundInfo.value['anzahlKinder']
+      ) ==
+      this.antragService.formAntrag().formallgemainKundInfo.value[
+        'anzahlKinder'
+      ]
     ) {
-      this.antragService.formAntrag().formallgemainKundInfo.get('seaugling')?.setValue('false');
+      this.antragService
+        .formAntrag()
+        .formallgemainKundInfo.get('seaugling')
+        ?.setValue('false');
 
       this.validFormKinder6();
     }
@@ -72,19 +73,29 @@ export class PersoenlicheAngabenComponent implements OnInit {
   }
 
   hasSeaugling(): void {
-    if (this.antragService.formAntrag().formallgemainKundInfo.value['seaugling'] == 'true') {
-      this.antragService.formAntrag().formallgemainKundInfo.controls['geburtsDatum6'].setValidators([
-        Validators.required,
-      ]);
-      this.antragService.formAntrag().formallgemainKundInfo.controls['vornamBaby'].setValidators([
-        Validators.required,
-      ]);
-      this.antragService.formAntrag().formallgemainKundInfo.controls[
-        'geburtsDatum6'
-      ].updateValueAndValidity();
-      this.antragService.formAntrag().formallgemainKundInfo.controls[
-        'vornamBaby'
-      ].updateValueAndValidity();
+    if (
+      this.antragService.formAntrag().formallgemainKundInfo.value[
+        'seaugling'
+      ] == 'true'
+    ) {
+      this.antragService
+        .formAntrag()
+        .formallgemainKundInfo.controls['geburtsDatum6'].setValidators([
+          Validators.required,
+        ]);
+      this.antragService
+        .formAntrag()
+        .formallgemainKundInfo.controls['vornamBaby'].setValidators([
+          Validators.required,
+        ]);
+      this.antragService
+        .formAntrag()
+        .formallgemainKundInfo.controls[
+          'geburtsDatum6'
+        ].updateValueAndValidity();
+      this.antragService
+        .formAntrag()
+        .formallgemainKundInfo.controls['vornamBaby'].updateValueAndValidity();
     } else {
       this.validFormKinder6();
     }
@@ -101,13 +112,25 @@ export class PersoenlicheAngabenComponent implements OnInit {
   }
 
   validFormKinder6(): void {
-    this.antragService.formAntrag().formallgemainKundInfo.get('geburtsDatum6')?.setValue('');
-    this.antragService.formAntrag().formallgemainKundInfo.get('vornamBaby')?.setValue('');
-    this.antragService.formAntrag().formallgemainKundInfo.controls['geburtsDatum6'].setValidators([]);
-    this.antragService.formAntrag().formallgemainKundInfo.controls['vornamBaby'].setValidators([]);
-    this.antragService.formAntrag().formallgemainKundInfo.controls[
-      'geburtsDatum6'
-    ].updateValueAndValidity();
-    this.antragService.formAntrag().formallgemainKundInfo.controls['vornamBaby'].updateValueAndValidity();
+    this.antragService
+      .formAntrag()
+      .formallgemainKundInfo.get('geburtsDatum6')
+      ?.setValue('');
+    this.antragService
+      .formAntrag()
+      .formallgemainKundInfo.get('vornamBaby')
+      ?.setValue('');
+    this.antragService
+      .formAntrag()
+      .formallgemainKundInfo.controls['geburtsDatum6'].setValidators([]);
+    this.antragService
+      .formAntrag()
+      .formallgemainKundInfo.controls['vornamBaby'].setValidators([]);
+    this.antragService
+      .formAntrag()
+      .formallgemainKundInfo.controls['geburtsDatum6'].updateValueAndValidity();
+    this.antragService
+      .formAntrag()
+      .formallgemainKundInfo.controls['vornamBaby'].updateValueAndValidity();
   }
 }
