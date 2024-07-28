@@ -1,1 +1,222 @@
-<p>tarif works!</p>
+<div class="container">
+  <div class="row" style="border: 1px solid #dcdcdc">
+    <div class="col-12">
+      <br />
+    </div>
+
+    <div class="col-12">
+      <form [formGroup]="formGewuenschTarif" (submit)="speicher()">
+        <div class="row">
+          <div class="col-12">
+            <label for="tarifVariant" class="form-label"
+              >Wünschen Sie eine Risikolebensversicherung mit gleichbleibender
+              oder gleichmäßig fallender Versicherungssumme?
+            </label>
+            <select
+              formControlName="tarifVariant"
+              (change)="rechnerBeitrag()"
+              class="form-control form-control-sm"
+              [ngClass]="{
+                'is-invalid': submitted && validateForm['tarifVariant'].errors
+              }"
+            >
+              <option
+                *ngFor="
+                  let tarifVariant of tarifVariants | keyvalue : originalOrder
+                "
+                [ngValue]="tarifVariant.key"
+              >
+                {{ tarifVariant.value }}
+              </option>
+            </select>
+            @if (submitted && validateForm['tarifVariant'].errors) {
+            <div class="hasErrorForm">
+              @if (validateForm['tarifVariant'].errors['required']) {
+              <div>
+                <hr />
+                Bitte wählen Sie eine Tarifvariante.
+              </div>
+              }
+            </div>
+            }
+          </div>
+          @if (formGewuenschTarif.value['tarifVariant']) {
+
+          <div class="col-12">
+            <hr />
+          </div>
+          <div class="col-12">
+            <app-tarif-wahl-beschreibung></app-tarif-wahl-beschreibung>
+          </div>
+          }
+
+          <div class="col-12">
+            <hr />
+          </div>
+          <div class="col-6">
+            <label for="versicherungssumme" class="form-label"
+              >Wie hoch soll Ihre Versicherungssumme sein?
+            </label>
+            <div class="row">
+              <div class="col-9">
+                <input
+                  type="range"
+                  class="form-range form-control-sm"
+                  min="15000"
+                  max="600000"
+                  id="customRange2"
+                  (change)="setVersicherungssumme($event)"
+                />
+              </div>
+              <div class="col-3">
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="versicherungssumme"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && validateForm['versicherungssumme'].errors
+                  }"
+                  readonly
+                />
+              </div>
+            </div>
+            @if (submitted && validateForm['versicherungssumme'].errors) {
+            <div class="hasErrorForm">
+              @if (validateForm['versicherungssumme'].errors['required']) {
+              <div>
+                <hr />
+                Bitte geben Sie den Versicherungssumme an.
+              </div>
+              }
+            </div>
+            }
+          </div>
+          
+
+          <div class="col-6">
+            <label for="zeitraum" class="form-label"
+              >Für welchen Zeitraum wollen Sie sich absichern?  
+            </label>
+            <div class="row">
+              <div class="col-9">
+                <input
+                  type="range"
+                  class="form-range form-control-sm"
+                  min="15"
+                  max="85"
+                  id="customRange2"
+                  (change)="setZeitraum($event)"
+                />
+              </div>
+              <div class="col-3">
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="zeitraum"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && validateForm['zeitraum'].errors
+                  }"
+                  readonly
+                />
+              </div>
+            </div>
+            @if (submitted && validateForm['zeitraum'].errors) {
+            <div class="hasErrorForm">
+              @if (validateForm['zeitraum'].errors['required']) {
+              <div>
+                <hr />
+                Bitte geben Sie den Zeitraum ein.
+              </div>
+              }
+            </div>
+            }
+          </div>
+          <div class="col-12">
+            <hr />
+          </div>
+
+          <div class="col-6">
+            <label for="versichertAb" class="form-label"
+              >
+              Ab wann möchten Sie sich absichern?  
+            </label>
+            <div *ngFor="let datum of datumList">
+
+              <input class="form-check-input" type="radio" 
+              formControlName="versichertAb"
+              (change)="rechnerBeitrag()"
+              [ngClass]="{
+                'is-invalid': submitted && validateForm['versichertAb'].errors
+              }"
+              value="{{datum}}"
+              id="{{datum}}"
+              >
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    {{datum | date:"dd.MM.yyyy" }}
+                </label>
+            </div>
+              
+            
+            @if (submitted && validateForm['versichertAb'].errors) {
+            <div class="hasErrorForm">
+              @if (validateForm['versichertAb'].errors['required']) {
+              <div>
+                <hr />
+                Bitte wählen Sie ein Datum.
+              </div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="col-6">
+            <label for="zahlungPeriode" class="form-label">
+              Wie wollen Sie Ihre Beiträge bezahlen?  
+            </label>
+
+            <select
+              formControlName="zahlungPeriode"
+              (change)="rechnerBeitrag()"
+              class="form-control form-control-sm"
+              [ngClass]="{
+                'is-invalid': submitted && validateForm['zahlungPeriode'].errors
+              }"
+            >
+              <option
+                *ngFor="
+                  let periode of zahlungPeriodes | keyvalue : originalOrder
+                "
+                [ngValue]="periode.key"
+              >
+                {{ periode.value }}
+              </option>
+            </select>
+
+            @if (submitted && validateForm['zahlungPeriode'].errors) {
+            <div class="hasErrorForm">
+              @if (validateForm['zahlungPeriode'].errors['required']) {
+              <div>
+                <hr />
+                Bitte wählen Sie die Abbüchungsmethode.
+              </div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="col-12">
+            <hr />
+          </div>
+          <div class="col-12 text-center">
+            <button type="button" class="btn btn-primary "   (click)="geheZuSchritt1()"  style="margin-bottom: 5px;">Zurück</button> &nbsp;
+            <button type="submit" class="btn btn-primary "  style="margin-bottom: 5px;">Wieter</button>
+          
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

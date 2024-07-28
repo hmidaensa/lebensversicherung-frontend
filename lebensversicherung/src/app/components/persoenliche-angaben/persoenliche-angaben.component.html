@@ -203,6 +203,7 @@
               [ngClass]="{
                 'is-invalid': submitted && validateForm['geburtsDatum6'].errors
               }"
+              (change)="rechnerBeitrag()"
             />
             @if (submitted && validateForm['geburtsDatum6'].errors) {
             <div class="hasErrorForm">
@@ -227,6 +228,7 @@
               [ngClass]="{
                 'is-invalid': submitted && validateForm['vornamBaby'].errors
               }"
+              (change)="rechnerBeitrag()"
             />
             @if (submitted && validateForm['vornamBaby'].errors) {
             <div class="hasErrorForm">
@@ -245,10 +247,12 @@
           <div class="col-12">
             <hr />
           </div>
-          <div class="col-12">
-            <button type="submit"  >
-              Wieter
-            </button>
+          <div class="col-12 text-center">
+           
+            <button type="submit" class="btn btn-primary "  style="margin-bottom: 5px;">Wieter</button>
+
+         
+           
           </div>
         </div>
       </form>

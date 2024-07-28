@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-body">
+      <div class="row" >
+        <div class="col-12">Sie haben die Wahl zwischen einer Risikolebensversicherung mit gleichbleibendem Todesfallschutz oder mit gleichmäßig fallendem Todesfallschutz.</div>
+        <hr>
+        <div class="col-12">
+          
+          @if (antragService.antrag()?.tarif!.tarifVariant==antragService.getEnumKeyByEnumValue(tarifVariant,tarifVariant.T1)) {
+             <h3>Gleichbleibender Todesfallschutz:</h3>
+             
+                Die Höhe der Versicherungssumme verändert sich während der Laufzeit nicht.
+                Für wen eignet sich der gleichbleibende Schutz? Wir empfehlen diesen zur Absicherung des Hauptverdieners, des Partners und der Familie.
+            } 
+        </div>
+        <div class="col-12">
+            @if (antragService.antrag()?.tarif!.tarifVariant==antragService.getEnumKeyByEnumValue(tarifVariant,tarifVariant.T2)) {
+                <h3>Gleichmäßig fallender Todesfallschutz:</h3>
+                Die Versicherungssumme fällt über die Laufzeit gleichmäßig ab.
+                Für wen eignet sich der gleichmäßig fallende Schutz?
+                Wir empfehlen diesen insbesondere zur Absicherung von Krediten (z. B. Immobiliendarlehen).
+            } 
+          </div>
+       </div>
+    </div>
+  </div>

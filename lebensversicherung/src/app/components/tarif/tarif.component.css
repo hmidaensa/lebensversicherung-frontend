@@ -1,0 +1,15 @@
+input{
+    background-color:#eeeff0
+}
+.is-invalid{
+    /*background-color:rgb(243, 184, 184)*/
+}
+
+.hasErrorForm{
+    color: red;
+
+}
+input[type="text"],select{
+    border-inline-start-width: thick;
+    border-left-color: green;
+}

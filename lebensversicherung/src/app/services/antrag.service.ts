@@ -2,6 +2,7 @@ import { computed, Injectable, signal } from '@angular/core';
 import { AntragLebensVersicherung } from '../interfaces/antrag-lebens-versicherung';
 import { AllgemainKundInfo } from '../interfaces/allgemain-kund-info';
 import { UtilsService } from './utils.service';
+import { Tarif } from '../interfaces/tarif';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,14 @@ export class AntragService extends UtilsService {
       return {
         ...item,
         allgemainKundInfo: allgemainKundInfo,
+      };
+    });
+  }
+  setTarifDaten(tarif: Tarif): void {
+    this.antrag.update((item) => {
+      return {
+        ...item,
+        tarif: tarif,
       };
     });
   }

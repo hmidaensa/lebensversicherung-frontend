@@ -70,7 +70,8 @@ kubectl get pods
 
 ###
 
-kubectl delete --all pods --namespace=foo
+
+ --namespace=foo
 kubectl delete --all deployments --namespace=foo
 
 kubectl delete --all namespaces

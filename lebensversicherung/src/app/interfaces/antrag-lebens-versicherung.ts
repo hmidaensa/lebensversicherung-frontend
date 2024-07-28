@@ -1,8 +1,8 @@
  import { AllgemainKundInfo } from "./allgemain-kund-info"
-import { TarifVariant } from "./tarif-variant"
-
+import { Tarif } from "./tarif"
+ 
 export interface AntragLebensVersicherung {
     antragsNummer?:string
     allgemainKundInfo?:AllgemainKundInfo
-    tarifVariant?:TarifVariant
+    tarif?:Tarif
 }
