@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -6,11 +6,33 @@ import { AnzalKinder } from '../enums/anzal-kinder';
 import { ApiService } from './apiService';
 import { HelpService } from './helpService';
 import { Raucherstatus } from '../enums/raucherstatus';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UtilsService implements ApiService, HelpService {
+
+  formAntrag = signal({
+    formallgemainKundInfo: new FormBuilder().group({
+      kundnummer: new FormControl('', []),
+      geburtsDatum: new FormControl('', [Validators.required]),
+      beruf: new FormControl('', [Validators.required]),
+      anzahlKinder: new FormControl('', [Validators.required]),
+      raucher: new FormControl('', [Validators.required]),
+      seaugling: new FormControl('false', []),
+      geburtsDatum6: new FormControl('', []),
+      vornamBaby: new FormControl('', []),
+    }),
+    formGewuenschTarif: new FormBuilder().group({ tarifVariant: new FormControl('', [Validators.required]),
+      versicherungssumme: new FormControl('', [Validators.required,Validators.min(15000)]),
+      zeitraum: new FormControl('', [Validators.required,]),
+      versichertAb: new FormControl('', [Validators.required,Validators.minLength(5)]),
+      zahlungPeriode: new FormControl('', [Validators.required]),})
+ });
+
+
+
   constructor(private http: HttpClient) {}
   rechnerBeitragAlter(geburtsDatum: Date): number {
     let alter = this.getAlterByGeburtsdatum(geburtsDatum);

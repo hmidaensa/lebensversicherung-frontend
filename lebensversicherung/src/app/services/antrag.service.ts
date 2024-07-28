@@ -12,6 +12,8 @@ export class AntragService extends UtilsService {
   isActivateStepper2 = signal(false);
   isActivateStepper3 = signal(false);
 
+  
+
   beitrag = computed(() => {
     return this.beitragKinder() + this.beitragRaucher() + this.beitragAlter();
   });
@@ -34,7 +36,7 @@ export class AntragService extends UtilsService {
     );
   });
 
-  setPersoenlicheDaten(allgemainKundInfo: AllgemainKundInfo): void {
+  setPersoenlicheDaten(allgemainKundInfo: any): void {
     this.antrag.update((item) => {
       return {
         ...item,
@@ -42,7 +44,7 @@ export class AntragService extends UtilsService {
       };
     });
   }
-  setTarifDaten(tarif: Tarif): void {
+  setTarifDaten(tarif: any): void {
     this.antrag.update((item) => {
       return {
         ...item,

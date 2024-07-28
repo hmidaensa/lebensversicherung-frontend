@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-12">
-      <form [formGroup]="formallgemainKundInfo" (submit)="speicher()">
+      <form [formGroup]="antragService.formAntrag().formallgemainKundInfo" (submit)="speicher()">
         <div class="row">
           <div class="col-6">
             <label for="geburtsDatum" class="form-label"
@@ -127,7 +127,7 @@
             }
           </div>
           
-          @if (formallgemainKundInfo.value['anzahlKinder'] && formallgemainKundInfo.value['anzahlKinder']!="KEINE_K") {
+          @if (antragService.formAntrag().formallgemainKundInfo.value['anzahlKinder'] && antragService.formAntrag().formallgemainKundInfo.value['anzahlKinder']!="KEINE_K") {
             <div class="col-12">
               <hr />
             </div>
@@ -186,7 +186,7 @@
               }
             </div>
           }
-          @if ((formallgemainKundInfo.value['seaugling'] && formallgemainKundInfo.value['seaugling']=="true")) {
+          @if ((antragService.formAntrag().formallgemainKundInfo.value['seaugling'] && antragService.formAntrag().formallgemainKundInfo.value['seaugling']=="true")) {
             
 
           <div class="col-12">

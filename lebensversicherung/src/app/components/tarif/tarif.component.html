@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-12">
-      <form [formGroup]="formGewuenschTarif" (submit)="speicher()">
+      <form [formGroup]="antragService.formAntrag().formGewuenschTarif" (submit)="speicher()">
         <div class="row">
           <div class="col-12">
             <label for="tarifVariant" class="form-label"
@@ -19,6 +19,7 @@
               [ngClass]="{
                 'is-invalid': submitted && validateForm['tarifVariant'].errors
               }"
+              
             >
               <option
                 *ngFor="
@@ -40,7 +41,7 @@
             </div>
             }
           </div>
-          @if (formGewuenschTarif.value['tarifVariant']) {
+          @if (antragService.formAntrag().formGewuenschTarif.value['tarifVariant']) {
 
           <div class="col-12">
             <hr />
@@ -82,6 +83,7 @@
               </div>
             </div>
             @if (submitted && validateForm['versicherungssumme'].errors) {
+              test
             <div class="hasErrorForm">
               @if (validateForm['versicherungssumme'].errors['required']) {
               <div>
@@ -160,6 +162,7 @@
               
             
             @if (submitted && validateForm['versichertAb'].errors) {
+              error
             <div class="hasErrorForm">
               @if (validateForm['versichertAb'].errors['required']) {
               <div>

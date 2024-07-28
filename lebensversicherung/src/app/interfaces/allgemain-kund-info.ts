@@ -3,7 +3,7 @@ import { Raucherstatus } from "../enums/raucherstatus"
 
 export interface AllgemainKundInfo {
 
-    kundnummer:string,
+    kundnummer:any,
     geburtsDatum:Date
     beruf:string
     anzahlKinder:AnzalKinder 

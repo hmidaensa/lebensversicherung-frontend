@@ -17,7 +17,7 @@ import { TarifWahlBeschreibungComponent } from '../tarif-wahl-beschreibung/tarif
   styleUrl: './tarif.component.css'
 })
 export class TarifComponent implements OnInit {
-   tarif?:Tarif
+   //tarif?:Tarif
   public submitted = false;
   public tarifVariants = TarifVariant;
   public zahlungPeriodes=Periode
@@ -25,14 +25,6 @@ export class TarifComponent implements OnInit {
   public readonly originalOrder = (): number => 0;
   datumList:any[]=[]
 
-  formGewuenschTarif: FormGroup = new FormGroup({
-    tarifVariant: new FormControl('', [Validators.required]),
-    versicherungssumme: new FormControl('', [Validators.required]),
-    zeitraum: new FormControl('', [Validators.required]),
-    versichertAb: new FormControl('', [Validators.required]),
-    zahlungPeriode: new FormControl('', [Validators.required]),
-    
-  });
 
 
   constructor(
@@ -41,22 +33,14 @@ export class TarifComponent implements OnInit {
     private router: Router
     
   ) {
-    this.formGewuenschTarif = formBuilder.group({
-      tarifVariant: new FormControl('', [Validators.required]),
-      versicherungssumme: new FormControl('', [Validators.required]),
-      zeitraum: new FormControl('', [Validators.required]),
-      versichertAb: new FormControl('', [Validators.required]),
-      zahlungPeriode: new FormControl('', [Validators.required]),
-    });
+    
    
   
     
      
   }
   ngOnInit(): void {
-    if(this.antragService.antrag() && this.antragService.antrag()?.tarif){
-      this.formGewuenschTarif= this.formBuilder.group(this.antragService.antrag()!.tarif!)
-    }
+   
   
     if (!this.antragService.isActivateStepper2()) {
       this.router.navigate(['/start/menu/perseonliche-angaben']);
@@ -65,32 +49,36 @@ export class TarifComponent implements OnInit {
     this.datumList.push(currentDate.setMonth(currentDate.getMonth()))
     this.datumList.push(currentDate.setMonth(currentDate.getMonth()+1))
     this.datumList.push(currentDate.setMonth(currentDate.getMonth()+1))
+
+    
   }
 
   get validateForm() {
-    return this.formGewuenschTarif.controls;
+    return this.antragService.formAntrag().formGewuenschTarif.controls;
   }
 
   geheZuSchritt1():void{
-    this.router.navigate(['/start/menu/perseonliche-angaben']);
+    this.router.navigateByUrl('/start/menu/perseonliche-angaben');
   }
   rechnerBeitrag():void{
-    this.antragService.setTarifDaten(this.formGewuenschTarif.value)
+    this.antragService.setTarifDaten(this.antragService.formAntrag().formGewuenschTarif.value)
   }
 
   speicher():void{
     this.submitted=true
-    console.log(this.formGewuenschTarif.value)
+
+    console.log(this.antragService.formAntrag().formGewuenschTarif.valid)
+    console.log(this.antragService.formAntrag().formGewuenschTarif.value)
     
   }
 
   setVersicherungssumme(event:any):void{
-    this.formGewuenschTarif.get('versicherungssumme')?.setValue(event.target.value);
+    this.antragService.formAntrag().formGewuenschTarif.get('versicherungssumme')?.setValue(event.target.value);
     this.rechnerBeitrag();
  
   }
   setZeitraum(event:any):void{
-    this.formGewuenschTarif.get('zeitraum')?.setValue(event.target.value);
+    this.antragService.formAntrag().formGewuenschTarif.get('zeitraum')?.setValue(event.target.value);
     this.rechnerBeitrag();
   }
 }
