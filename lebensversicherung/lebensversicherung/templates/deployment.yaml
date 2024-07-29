@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "lebensversicherung.fullname" . }}
+  namespace:  {{ .Values.namespace }}
   labels:
     {{- include "lebensversicherung.labels" . | nindent 4 }}
 spec:

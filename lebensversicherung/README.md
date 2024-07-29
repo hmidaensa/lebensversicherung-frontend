@@ -55,7 +55,7 @@ docker image push atanane/myapp-lebensversicherung:latest
 
 ### kuberntes 
 # Start minikube
-minikube start
+minikube start --driver=docker
 
 # Set docker env
 minikube docker-env | Invoke-Expression # PowerShell
@@ -67,14 +67,36 @@ helm install lebensverischerung-chart-2 lebensversicherung
 # Check that it's running
 kubectl get pods
 
-
+kubectl get pods -o wide
 ###
-
+minikube tunnel  ## external ip
 
  --namespace=foo
 kubectl delete --all deployments --namespace=foo
 
 kubectl delete --all namespaces
 
+helm install  app-deplyoment-1  lebensversicherung
+helm upgrade  app-deplyoment-1  lebensversicherung
 helm list -a
+
+minikube service service-name --url 
+minikube service pods-name --url --namespace=name of space
+
+## igress
+
+minikube addons enable ingress
+
+minikube tunnel
+
+minikube dashboard --url 
+
+##
+
+kubectl port-forward podname yourport:80
+
+
+kubectl describe svc app-namespace-lebensversicherung --namespace=lebensversicherung
+
+
 

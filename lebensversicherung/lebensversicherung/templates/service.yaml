@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "lebensversicherung.fullname" . }}
+  namespace:  {{ .Values.namespace }}
   labels:
     {{- include "lebensversicherung.labels" . | nindent 4 }}
 spec:

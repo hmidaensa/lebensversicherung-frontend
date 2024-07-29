@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
   styleUrl: './persoenliche-angaben.component.css',
 })
 export class PersoenlicheAngabenComponent implements OnInit {
-  allgemainKundInfo?: any;
+  
   public submitted = false;
   public anzalKinders = AnzalKinder;
   public raucherstatusses = Raucherstatus;
