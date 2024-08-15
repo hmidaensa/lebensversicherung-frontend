@@ -45,7 +45,21 @@
               <div class="step-counter">
                 <a [routerLink]="['/start/menu/']"> <i class="bi bi-receipt"></i> </a>
               </div>
-              <div class="step-name">Zusammenfassung</div>
+              <div class="step-name">
+
+                @if(comments.loading()) {
+                  Loading comments...
+                } @else {
+                  @let list = comments.data() ?? [];
+                  We have {{list.length}} comments
+                  @for(comment of list; track comment.id) {
+                    <li>{{comment.body}} (by {{comment.email}})</li>
+                  }
+                }
+                @if (comments.error()) {
+                  Something went wrong!
+                }
+              </div>
             </div>
           </div>
         </div>
