@@ -20,6 +20,7 @@ pipeline {
                 script {
                     // Build the Docker image using Docker Compose
                     bat "docker-compose -f ${DOCKER_COMPOSE_FILE} build"
+                    echo 'Build Docker Image end.'
                 }
             }
         }
@@ -35,6 +36,7 @@ pipeline {
 
                     // Tag the image with the Docker Hub repository name
                     bat "docker tag ${imageId} ${IMAGE_NAME}:${env.BUILD_NUMBER}"
+                    echo 'Tag Docker Image end.'
                 }
             }
         }
@@ -42,11 +44,14 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
+                    echo 'Push to Docker Hub begin .'
+                    echo '${env.BUILD_NUMBER}'
                     // Log in to Docker Hub
                     bat "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
                     
                     // Push the image to Docker Hub
                     bat "docker push ${IMAGE_NAME}:${env.BUILD_NUMBER}"
+                    echo 'Push to Docker Hub end'
                 }
             }
         }
