@@ -31,7 +31,7 @@ pipeline {
                 script {
                      echo 'Tag Docker Image begin ${env.BUILD_NUMBER}.'
                     // Get the image ID of the built image
-                    def imageId = sh(
+                    def imageId = bat(
                         script: "docker-compose -f ${DOCKER_COMPOSE_FILE} images -q your-service-name",
                         returnStdout: true
                     ).trim()
