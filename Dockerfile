@@ -1,5 +1,5 @@
 # Use official node image as the base image
-FROM node:19.5.0-alpine AS build
+FROM node:20-alpine3.20 AS build
 
 # Set the working directory
 WORKDIR /usr/local/app
@@ -20,8 +20,8 @@ RUN npm run build
 FROM nginx:1-alpine3.18
 
 # Copy the build output to replace the default nginx contents.
-COPY --from=build /usr/local/app/dist/lebensversicherung/browser /usr/share/nginx/html
-COPY --from=build /usr/local/app/dist/lebensversicherung/browser/index.csr.html /usr/share/nginx/html/index.html
+COPY --from=build /usr/local/app/dist/browser /usr/share/nginx/html
+COPY --from=build /usr/local/app/dist/browser/index.csr.html /usr/share/nginx/html/index.html
 
 # Expose port 80
 EXPOSE 80

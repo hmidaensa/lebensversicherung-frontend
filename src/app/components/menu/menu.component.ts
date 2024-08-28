@@ -5,16 +5,16 @@ import { VersicherungsBeitragComponent } from '../versicherungs-beitrag/versiche
 import { StepperDirective } from '../../shared/stepper.directive';
 import { AntragService } from '../../services/antrag.service';
 import { HttpClient } from '@angular/common/http';
-import { signalify } from 'ngx-signalify';
+//import { signalify } from 'ngx-signalify';
 
-
+/*
 const URL = 'https://jsonplaceholder.typicode.com/comments';
-
+"ngx-signalify": "^0.2.1",
 interface Comment {
   id: number;
   body: string;
   email: string;
-}
+}*/
 @Component({
   selector: 'app-menu',
   standalone: true,
@@ -25,7 +25,7 @@ interface Comment {
 })
 export class MenuComponent {
 
-  http = inject(HttpClient);
-  comments = signalify(this.http.get<Comment[]>(URL));
+  //http = inject(HttpClient);
+  //comments = signalify(this.http.get<Comment[]>(URL));
 
 }

@@ -26,10 +26,14 @@
                 "input": "public"
               }
             ],
-            "styles": [
+           "styles": [
+
              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+
               "src/styles.css"
+
             ],
             "scripts": [ "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
             "server": "src/main.server.ts",
@@ -52,14 +56,22 @@
                   "maximumError": "4kB"
                 }
               ],
+              
               "optimization": {
-    "scripts": true,
-    "styles": {
-        "minify": true,
-        "inlineCritical": false
-    },
-    "fonts": true
-},
+
+                "scripts": true,
+            
+                "styles": {
+            
+                    "minify": true,
+            
+                    "inlineCritical": false
+            
+                },
+            
+                "fonts": true
+            
+            },
               "outputHashing": "all"
             },
             "development": {
@@ -100,20 +112,15 @@
               }
             ],
             "styles": [
-          
               "src/styles.css"
-
-               
             ],
-            "scripts": [
-             
-            ]
+            "scripts": []
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": "efb69c7a-cd2a-4b8e-96cd-6f10582798b9"
+    "analytics": "184a7249-9ba1-49da-b645-0843ddc1dffb"
   }
 }
