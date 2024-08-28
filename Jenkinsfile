@@ -37,7 +37,7 @@ pipeline {
                     ).trim()
 
                     // Tag the image with the Docker Hub repository name
-                    bat "docker tag ${imageId} ${IMAGE_NAME}:${env.BUILD_NUMBER}"
+                    bat "docker tag ${imageId}:latest ${IMAGE_NAME}:${env.BUILD_NUMBER}"
                     echo 'Tag Docker Image end.'
                 }
             }
