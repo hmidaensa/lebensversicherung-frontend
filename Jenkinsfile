@@ -7,7 +7,7 @@ pipeline {
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
         dockerImage=''
         DOCKER_REGISTRY = 'docker.io'
-        IMAGE_TAG = 'latest'
+
     }
 
     stages {
@@ -62,7 +62,7 @@ pipeline {
                         dockerImage.push()
                         }*/
                         // Login to Docker Hub (or another Docker registry)
-                    docker.withRegistry("https://${env.DOCKER_REGISTRY}", "${env.DOCKER_CREDENTIALS_ID}") {
+                    docker.withRegistry("https://${env.DOCKER_REGISTRY}", 'dockerhub-credentials-id') {
                         // Tag the image
                         //sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
                         
