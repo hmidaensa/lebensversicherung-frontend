@@ -81,7 +81,7 @@ pipeline {
         stage('push image') {
             steps{
                  echo 'Push iamge : ${BUILD_NUMBER}.'
-                bat 'docker push atanane/myapp-lebensversicherung:${BUILD_NUMBER}'
+                bat 'docker push atanane/myapp-lebensversicherung:latest'
             }
         }
     }
