@@ -73,11 +73,11 @@ pipeline {
                 }
             }
         }*/
-        stage('login to dockerhub') {
+        /*stage('login to dockerhub') {
             steps{
-               // bat 'echo $DOCKERHUB_CREDENTIALS_USR | docker login -u $DOCKERHUB_CREDENTIALS_PSW --password-stdin'
+                bat 'echo $DOCKERHUB_CREDENTIALS_USR | docker login -u $DOCKERHUB_CREDENTIALS_PSW --password-stdin'
             }
-        }
+        }*/
         stage('push image') {
             steps{
                 bat 'docker push ${IMAGE_NAME}:$BUILD_NUMBER'
