@@ -64,10 +64,10 @@ pipeline {
                         // Login to Docker Hub (or another Docker registry)
                     docker.withRegistry("https://${env.DOCKER_REGISTRY}", "${env.DOCKER_CREDENTIALS_ID}") {
                         // Tag the image
-                        bat "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+                        sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
                         
                         // Push the image
-                        bat "docker push ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+                        sh "docker push ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
                   
                 }
             }
