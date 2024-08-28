@@ -2,10 +2,12 @@ pipeline {
     agent any
 
     environment {
-        //DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
         IMAGE_NAME = 'atanane/myapp-lebensversicherung'
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
         dockerImage=''
+        DOCKER_REGISTRY = 'docker.io'
+        IMAGE_TAG = 'latest'
     }
 
     stages {
@@ -26,7 +28,7 @@ pipeline {
             }
         }
 
-        stage('Tag Docker Image') {
+        /*stage('Tag Docker Image') {
             steps {
                 script {
                      echo 'Tag Docker Image begin ${env.BUILD_NUMBER}.'
@@ -38,10 +40,11 @@ pipeline {
 
                     // Tag the image with the Docker Hub repository name
                     bat "docker tag ${imageId}:latest ${IMAGE_NAME}:${env.BUILD_NUMBER}"
+
                     echo 'Tag Docker Image end.'
                 }
             }
-        }
+        }*/
 
         stage('Push to Docker Hub') {
             steps {
@@ -53,11 +56,19 @@ pipeline {
                     
                     // Push the image to Docker Hub
                     bat "docker push ${IMAGE_NAME}:${env.BUILD_NUMBER}"
-                    echo 'Push to Docker Hub end'*/
+                    echo 'Push to Docker Hub end'
                     docker.withRegistry( '', 'dockerhub-credentials-id' ) {
                         dockerImage=IMAGE_NAME+':${env.BUILD_NUMBER}'
                         dockerImage.push()
-                        }
+                        }*/
+                        // Login to Docker Hub (or another Docker registry)
+                    docker.withRegistry("https://${env.DOCKER_REGISTRY}", "${env.DOCKER_CREDENTIALS_ID}") {
+                        // Tag the image
+                        bat "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+                        
+                        // Push the image
+                        bat "docker push ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+                  
                 }
             }
         }
