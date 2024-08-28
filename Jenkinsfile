@@ -68,6 +68,7 @@ pipeline {
                         
                         // Push the image
                         sh "docker push ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
+                    }
                   
                 }
             }
