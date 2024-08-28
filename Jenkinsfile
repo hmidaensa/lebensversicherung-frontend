@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
+        //DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
         IMAGE_NAME = 'atanane/myapp-lebensversicherung'
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
         dockerImage=''
@@ -54,7 +54,7 @@ pipeline {
                     // Push the image to Docker Hub
                     bat "docker push ${IMAGE_NAME}:${env.BUILD_NUMBER}"
                     echo 'Push to Docker Hub end'*/
-                    docker.withRegistry( '', DOCKERHUB_CREDENTIALS ) {
+                    docker.withRegistry( '', 'dockerhub-credentials-id' ) {
                         dockerImage=IMAGE_NAME+':${env.BUILD_NUMBER}'
                         dockerImage.push()
                         }
