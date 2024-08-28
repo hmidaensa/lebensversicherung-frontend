@@ -75,12 +75,12 @@ pipeline {
         }*/
         stage('login to dockerhub') {
             steps{
-                bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                bat 'echo $DOCKERHUB_CREDENTIALS_USR | docker login -u $DOCKERHUB_CREDENTIALS_PSW --password-stdin'
             }
         }
         stage('push image') {
             steps{
-                sh 'docker push ${IMAGE_NAME}:$BUILD_NUMBER'
+                bat 'docker push ${IMAGE_NAME}:$BUILD_NUMBER'
             }
         }
     }
