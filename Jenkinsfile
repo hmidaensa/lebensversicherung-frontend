@@ -67,7 +67,7 @@ pipeline {
                         //sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
                         
                         // Push the image
-                        sh "docker push ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
+                        bat "docker push ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
                     }
                   
                 }
