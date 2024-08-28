@@ -46,7 +46,7 @@ pipeline {
             }
         }*/
 
-        stage('Push to Docker Hub') {
+        /*stage('Push to Docker Hub') {
             steps {
                 script {
                     echo 'Push to Docker Hub begin .'
@@ -62,7 +62,7 @@ pipeline {
                         dockerImage.push()
                         }*/
                         // Login to Docker Hub (or another Docker registry)
-                    docker.withRegistry("https://${env.DOCKER_REGISTRY}", 'dockerhub-credentials-id') {
+                    /*docker.withRegistry("https://${env.DOCKER_REGISTRY}", 'dockerhub-credentials-id') {
                         // Tag the image
                         //sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
                         
@@ -71,6 +71,16 @@ pipeline {
                     }
                   
                 }
+            }
+        }*/
+        stage('login to dockerhub') {
+            steps{
+                bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        stage('push image') {
+            steps{
+                sh 'docker push ${IMAGE_NAME}:$BUILD_NUMBER'
             }
         }
     }
