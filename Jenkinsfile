@@ -5,6 +5,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
         IMAGE_NAME = 'atanane/myapp-lebensversicherung'
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+        dockerImage=''
     }
 
     stages {
@@ -46,13 +47,17 @@ pipeline {
             steps {
                 script {
                     echo 'Push to Docker Hub begin .'
-                    echo '${env.BUILD_NUMBER}'
+                    /*echo '${env.BUILD_NUMBER}'
                     // Log in to Docker Hub
                     bat "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
                     
                     // Push the image to Docker Hub
                     bat "docker push ${IMAGE_NAME}:${env.BUILD_NUMBER}"
-                    echo 'Push to Docker Hub end'
+                    echo 'Push to Docker Hub end'*/
+                    docker.withRegistry( '', DOCKERHUB_CREDENTIALS ) {
+                        dockerImage=IMAGE_NAME+':${env.BUILD_NUMBER}'
+                        dockerImage.push()
+                        }
                 }
             }
         }
