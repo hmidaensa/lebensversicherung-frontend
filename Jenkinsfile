@@ -103,30 +103,12 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image using Docker Compose
-                    bat "docker-compose -f ${DOCKER_COMPOSE_FILE} build"
-                    echo 'Build Docker Image end.'
+                    bat "docker-compose build"
                 }
             }
         }
 
-        stage('Tag Docker Image') {
-            steps {
-                script {
-                     echo 'Tag Docker Image begin ${env.BUILD_NUMBER}.'
-                    // Get the image ID of the built image
-                    def imageId = bat(
-                        script: "docker-compose -f ${DOCKER_COMPOSE_FILE} images -q your-service-name",
-                        returnStdout: true
-                    ).trim()
-                  echo 'Tag Docker Image begin ${imageId}.'
-                    // Tag the image with the Docker Hub repository name
-                    bat "docker tag ${imageId} ${IMAGE_NAME}:${env.BUILD_NUMBER}"
-
-                    echo 'Tag Docker Image end.'
-                }
-            }
-        }
+       
 
         stage('Push to Docker Hub') {
             steps {
@@ -136,24 +118,16 @@ pipeline {
                     // Push the image to Docker Hub
                     
                     docker.withRegistry( '', 'dockerhub-credentials-id' ) {
-                        dockerImage=IMAGE_NAME+':${env.BUILD_NUMBER}'
-                        dockerImage.push()
-                        //bat "docker push ${IMAGE_NAME}:${env.BUILD_NUMBER}"
-                        echo 'Push to Docker Hub end'
+                        sh 'sudo docker push atanane/myapp-lebensversicherung:$BUILD_NUMBER' 
                         }
-                        // Login to Docker Hub (or another Docker registry)
+                        
                    
                   
                 }
             }
         }
 
-        /*stage('push image') {
-            steps{
-                 echo 'Push iamge : ${BUILD_NUMBER}.'
-                bat 'docker push atanane/myapp-lebensversicherung:latest'
-            }
-        }*/
+        
     }
 
     post {
