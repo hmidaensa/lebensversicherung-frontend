@@ -29,7 +29,8 @@ environment {
 
                 script { 
 
-                    dockerImage = docker-compose.build registry + ":$BUILD_NUMBER" 
+                    //dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                    bat "docker-compose build"
 
                 }
 
@@ -44,8 +45,10 @@ environment {
                 script { 
 
                     docker.withRegistry( '', registryCredential ) { 
+                        def imageTag = "${BUILD_NUMBER}"  // Use BUILD_NUMBER as the tag
+                        def imageName = "${registry}:${imageTag}"
 
-                        dockerImage.push() 
+                        imageName.push() 
 
                     }
 
