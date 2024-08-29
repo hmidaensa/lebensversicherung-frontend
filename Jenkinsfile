@@ -29,8 +29,8 @@ environment {
 
                 script { 
 
-                    //dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-                    bat "docker-compose build"
+                    dockerImage = docker-compose.build(registry + ":$BUILD_NUMBER")
+                    //bat "docker-compose build"
 
                 }
 
@@ -45,10 +45,10 @@ environment {
                 script { 
 
                     docker.withRegistry( '', registryCredential ) { 
-                        echo "${BUILD_NUMBER}"
-                         sh 'docker push ${registry}:${BUILD_NUMBER}'
+                    //echo "${BUILD_NUMBER}"
+                     //sh 'docker push ${registry}:${BUILD_NUMBER}'
                         //bat 'docker push ${imageName} '
-                       // dockerImage.push() 
+                       dockerImage.push() 
 
                     }
 
