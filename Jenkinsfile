@@ -1,89 +1,71 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
-        IMAGE_NAME = 'atanane/myapp-lebensversicherung'
-        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
-        dockerImage=''
-        DOCKER_REGISTRY = 'docker.io'
+environment { 
+
+        registry = "atanane/myapp-lebensversicherung" 
+
+        registryCredential = 'dockerhub-credentials-id' 
+
+        dockerImage = '' 
 
     }
+   
 
-    stages {
-        stage('Checkout') {
-            steps {
-                // Check out the repository containing the Docker Compose file
-                git url: 'https://github.com/hmidaensa/lebensversicherung-frontend.git', branch: 'main'
+    stages { 
+
+        stage('Cloning our Git') { 
+
+            steps { 
+               git url: 'https://github.com/hmidaensa/lebensversicherung-frontend.git', branch: 'main'
+                //git 'https://github.com/YourGithubAccount/YourGithubRepository.git' 
+
             }
+
+        } 
+
+        stage('Building our image') { 
+
+            steps { 
+
+                script { 
+
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+
+                }
+
+            } 
+
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    // Build the Docker image using Docker Compose
-                    bat "docker-compose -f ${DOCKER_COMPOSE_FILE} build"
-                    echo 'Build Docker Image end.'
-                }
-            }
-        }
+        stage('Deploy our image') { 
 
-        /*stage('Tag Docker Image') {
-            steps {
-                script {
-                     echo 'Tag Docker Image begin ${env.BUILD_NUMBER}.'
-                    // Get the image ID of the built image
-                    def imageId = bat(
-                        script: "docker-compose -f ${DOCKER_COMPOSE_FILE} images -q your-service-name",
-                        returnStdout: true
-                    ).trim()
+            steps { 
 
-                    // Tag the image with the Docker Hub repository name
-                    bat "docker tag ${imageId}:latest ${IMAGE_NAME}:${env.BUILD_NUMBER}"
+                script { 
 
-                    echo 'Tag Docker Image end.'
-                }
-            }
-        }*/
+                    docker.withRegistry( '', registryCredential ) { 
 
-        /*stage('Push to Docker Hub') {
-            steps {
-                script {
-                    echo 'Push to Docker Hub begin .'
-                    /*echo '${env.BUILD_NUMBER}'
-                    // Log in to Docker Hub
-                    bat "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
-                    
-                    // Push the image to Docker Hub
-                    bat "docker push ${IMAGE_NAME}:${env.BUILD_NUMBER}"
-                    echo 'Push to Docker Hub end'
-                    docker.withRegistry( '', 'dockerhub-credentials-id' ) {
-                        dockerImage=IMAGE_NAME+':${env.BUILD_NUMBER}'
-                        dockerImage.push()
-                        }*/
-                        // Login to Docker Hub (or another Docker registry)
-                    /*docker.withRegistry("https://${env.DOCKER_REGISTRY}", 'dockerhub-credentials-id') {
-                        // Tag the image
-                        //sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
-                        
-                        // Push the image
-                        bat "docker push ${env.DOCKER_REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
+                        dockerImage.push() 
+
                     }
-                  
-                }
+
+                } 
+
             }
-        }*/
-        /*stage('login to dockerhub') {
-            steps{
-                bat 'echo $DOCKERHUB_CREDENTIALS_USR | docker login -u $DOCKERHUB_CREDENTIALS_PSW --password-stdin'
+
+        } 
+30
+        stage('Cleaning up') { 
+31
+            steps { 
+32
+                sh "docker rmi $registry:$BUILD_NUMBER" 
+33
             }
-        }*/
-        stage('push image') {
-            steps{
-                 echo 'Push iamge : ${BUILD_NUMBER}.'
-                bat 'docker push atanane/myapp-lebensversicherung:latest'
-            }
-        }
+34
+        } 
+35
     }
 
     post {
