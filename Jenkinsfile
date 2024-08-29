@@ -18,7 +18,6 @@ environment {
 
             steps { 
                git url: 'https://github.com/hmidaensa/lebensversicherung-frontend.git', branch: 'main'
-                //git 'https://github.com/YourGithubAccount/YourGithubRepository.git' 
 
             }
 
@@ -30,7 +29,7 @@ environment {
 
                 script { 
 
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                    dockerImage = docker-compose.build registry + ":$BUILD_NUMBER" 
 
                 }
 
