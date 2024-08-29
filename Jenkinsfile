@@ -117,8 +117,8 @@ pipeline {
                    
                     // Push the image to Docker Hub
                     
-                    docker.withRegistry( '', 'dockerhub-credentials-id' ) {
-                        sh 'sudo docker push atanane/myapp-lebensversicherung:$BUILD_NUMBER' 
+                    docker.withRegistry( 'https://registry.hub.docker.com', 'dockerhub-credentials-id' ) {
+                        bat 'docker push atanane/myapp-lebensversicherung:$BUILD_NUMBER' 
                         }
                         
                    
