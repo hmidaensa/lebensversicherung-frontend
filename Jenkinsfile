@@ -55,8 +55,14 @@ environment {
         } 
         //helm-deploy-to-eks-argocd-manifest name of other job in jenkins in wich we will update tag
         stage('Trigger ManifestUpdate') {
+              steps { 
+
+                script { 
+
                 echo "triggering updatemanifestjob"
                 build job: 'helm-deploy-to-eks-argocd-manifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+                }
+              }
         }
 
 
