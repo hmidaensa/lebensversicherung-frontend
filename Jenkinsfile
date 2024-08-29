@@ -47,7 +47,7 @@ environment {
                     docker.withRegistry( '', registryCredential ) { 
                         def imageTag = "${BUILD_NUMBER}"  // Use BUILD_NUMBER as the tag
                         //def imageName = "${registry}:${imageTag}"
-                        docker push registry + ":$BUILD_NUMBER" 
+                        bat 'docker push registry + ":$BUILD_NUMBER" '
                        // dockerImage.push() 
 
                     }
