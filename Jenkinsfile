@@ -1,4 +1,4 @@
-/*pipeline {
+pipeline {
     agent any
 
 environment { 
@@ -44,7 +44,6 @@ environment {
                 script { 
 
                     docker.withRegistry( '', registryCredential ) { 
-
                         dockerImage.push() 
 
                     }
@@ -69,7 +68,6 @@ environment {
     post {
         always {
             // Clean up the workspace and remove any local images to save space
-            bat 'docker-compose down --rmi all'
             bat 'docker system prune -f'
         }
         success {
@@ -79,8 +77,8 @@ environment {
             echo 'Pipeline failed.'
         }
     }
-}*/
-
+}
+/*
 pipeline {
     agent any
 
@@ -144,4 +142,4 @@ pipeline {
         }
     }
 }
-
+*/
