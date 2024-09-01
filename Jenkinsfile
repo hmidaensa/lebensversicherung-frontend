@@ -71,7 +71,7 @@ environment {
     post {
         always {
             // Clean up the workspace and remove any local images to save space
-            bat 'docker system prune -f'
+           // sh 'docker system prune'
         }
         success {
             echo 'Pipeline completed successfully.'
