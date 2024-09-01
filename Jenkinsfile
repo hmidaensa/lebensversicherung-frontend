@@ -72,6 +72,7 @@ environment {
         always {
             // Clean up the workspace and remove any local images to save space
            // sh 'docker system prune'
+            echo 'Pipeline completed finally.'
         }
         success {
             echo 'Pipeline completed successfully.'
