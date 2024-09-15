@@ -1,0 +1,50 @@
+##
+npm install jest @types/jest @jest/globals jest-preset-angular --save-dev
+##
+npm i ts-node
+##
+create jest.config.ts
+and add :
+module.exports = {
+    preset: 'jest-preset-angular',
+    setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+    globalSetup: 'jest-preset-angular/global-setup',
+};
+
+##
+create setup-jest.ts
+and add :
+import "jest-preset-angular/setup-jest";
+##
+tsconfig.spec.json look like :
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "types": [
+      "jest" ,
+      "node" // New 
+    ],
+  "module": "ESNext",//E2020XXX
+    "target": "ES6",
+  },
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts"
+  ]
+}
+##
+in package.json add type and update
+{
+  "name": "angular-jest",
+   ...
+  "type": "module",
+  ...
+    "scripts": {
+    ...
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    ...
+##
+remove all karma dependnecies
+romve "test": from angular.json
